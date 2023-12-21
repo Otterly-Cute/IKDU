@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator myAnimator;
     public bool facingRight = true;
 
-    [SerializeField] private float speed = 1.4f;
+    [SerializeField] private float speed = 1.6f;
 
     public void Awake()
     {
@@ -21,11 +21,15 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = value.Get<Vector2>();
 
+        float h = Input.GetAxis("Horizontal");
+        if (h > 0 && !facingRight)
+        { Flip(); }
+        else if (h < 0 && facingRight)
+        { Flip(); }
 
         if (movement.x != 0 || movement.y != 0)
         {
             myAnimator.SetFloat("x", movement.x);
-           // this.transform.Translate(new Vector3(movement.x,0), Space.World);
             myAnimator.SetFloat("y", movement.y);
 
             myAnimator.SetBool("isWalking", true);
@@ -35,11 +39,7 @@ public class PlayerMovement : MonoBehaviour
             myAnimator.SetBool("isWalking", false);
         }
         
-        float h = Input.GetAxis("Horizontal");
-        if (h > 0 && !facingRight)
-        { Flip(); }
-        else if (h < 0 && facingRight)
-        { Flip(); }
+       
     }
 
     public void Flip()
@@ -54,7 +54,6 @@ public class PlayerMovement : MonoBehaviour
     {
         myBody.velocity = movement * speed;
 
-       /* bool flipped=movement.x < 0;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0f, flipped ? 180f : 0f, 0f)); */
+
     }
 }
