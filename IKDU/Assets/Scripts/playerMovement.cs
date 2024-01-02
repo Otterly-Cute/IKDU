@@ -11,11 +11,20 @@ public class playerMovement : MonoBehaviour
 
     [SerializeField] private int speed = 5;
 
+    /// <summary>
+    /// on awake, which happens before start, 
+    /// we get the components needed for the script to work, if we didnt do it in the script we would have to do it manually in Unity
+    /// </summary>
     private void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
     }
+    /// <summary>
+    /// here we use the Unity inputsystem (InputValue)
+    /// we get the value of vector2 and see if our x or y is not 0
+    /// </summary>
+    /// <param name="value"></param>
     private void OnMovement(InputValue value)
     {
         movement = value.Get<Vector2>();
