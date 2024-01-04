@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,7 +14,7 @@ public class playerMovement : MonoBehaviour
 
     /// <summary>
     /// on awake, which happens before start, 
-    /// we get the components needed for the script to work, if we didnt do it in the script we would have to do it manually in Unity
+    /// we get the components needed for the script to work (if we didnt do it in the script we would have to do it manually in Unity)
     /// </summary>
     private void Awake()
     {
@@ -21,8 +22,10 @@ public class playerMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
     }
     /// <summary>
-    /// here we use the Unity inputsystem (InputValue)
-    /// we get the value of vector2 and see if our x or y is not 0
+    /// we get the value of vector2 (which we get from playerinputs) and see if our x or y is not 0
+    /// if the statement is true, we set the animaters values and set the bool isWalking to true
+    /// this will trigger the correct animations
+    /// if the statement is false, we will stop the animation
     /// </summary>
     /// <param name="value"></param>
     private void OnMovement(InputValue value)
@@ -42,6 +45,9 @@ public class playerMovement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// our movement speed
+    /// </summary>
     private void FixedUpdate()
     {
         myBody.velocity = movement * speed;
