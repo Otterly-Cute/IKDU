@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     {
         movement = value.Get<Vector2>();
 
-        float h = Input.GetAxis("Horizontal");
+        float h = Input.GetAxis("Horizontal"); //https://forum.unity.com/threads/how-to-flip-animation-in-2d.375921/
         if (h > 0 && !facingRight)
         { Flip(); }
         else if (h < 0 && facingRight)
@@ -38,11 +38,9 @@ public class PlayerMovement : MonoBehaviour
         {
             myAnimator.SetBool("isWalking", false);
         }
-        
-       
     }
 
-    public void Flip()
+    public void Flip() //https://forum.unity.com/threads/how-to-flip-animation-in-2d.375921/
     {
         facingRight = !facingRight;
         Vector3 theScale = transform.localScale;
@@ -53,7 +51,5 @@ public class PlayerMovement : MonoBehaviour
     public void FixedUpdate()
     {
         myBody.velocity = movement * speed;
-
-
     }
 }
